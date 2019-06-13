@@ -130,7 +130,7 @@ class MassConsumer implements ConsumerInterface
                 }
             } catch (NotFoundException $e) {
                 $queue->acknowledge($message);
-//            $this->logger->warning($e->getMessage());
+                $this->logger->warning($e->getMessage());
             } catch (\Exception $e) {
 
 
