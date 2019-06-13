@@ -1,0 +1,4 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="altayer-customcatalog-consumer" queue="altayer-customcatalog-queue" connection="amqp"
+          consumerInstance="Altayer\Customcatalog\Model\MassConsumer"/>
+</config>

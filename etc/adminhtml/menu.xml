@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Altayer_Customcatalog::product" title="Customcatalog" translate="title"
+             module="Altayer_Customcatalog" parent="Magento_Catalog::inventory" sortOrder="30"
+             action="customcatalog/product/index" resource="Altayer_Customcatalog::product"/>
+
+<!--        <add id="Webkul_Grid::add_row" title="Grid Manager" module="Webkul_Grid" sortOrder="20"-->
+<!--             parent="Webkul_Grid::manager" action="grid/grid" resource="Webkul_Grid::add_row"/>-->
+
+    </menu>
+</config>
