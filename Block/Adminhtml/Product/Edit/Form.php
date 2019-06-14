@@ -6,6 +6,7 @@
  * @author      Altayer Group
  *
  */
+
 namespace Altayer\Customcatalog\Block\Adminhtml\Product\Edit;
 
 /**
@@ -15,16 +16,17 @@ namespace Altayer\Customcatalog\Block\Adminhtml\Product\Edit;
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
     /**
-     * @param \Magento\Backend\Block\Template\Context $context,
-     * @param \Magento\Framework\Registry $registry,
-     * @param \Magento\Framework\Data\FormFactory $formFactory,
+     * @param \Magento\Backend\Block\Template\Context $context ,
+     * @param \Magento\Framework\Registry $registry ,
+     * @param \Magento\Framework\Data\FormFactory $formFactory ,
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         array $data = []
-    ) {
+    )
+    {
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -38,11 +40,11 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create(
             ['data' => [
-                            'id' => 'edit_form',
-                            'enctype' => 'multipart/form-data',
-                            'action' => $this->getData('action'),
-                            'method' => 'post'
-                        ]
+                'id' => 'edit_form',
+                'enctype' => 'multipart/form-data',
+                'action' => $this->getData('action'),
+                'method' => 'post'
+            ]
             ]
         );
 

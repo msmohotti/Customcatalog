@@ -1,12 +1,12 @@
 <?php
 /**
- * Webkul Grid List Controller.
- * @category  Webkul
- * @package   Webkul_Grid
- * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
- * @license   https://store.webkul.com/license.html
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
  */
+
 namespace Altayer\Customcatalog\Controller\Adminhtml\Product;
 
 use Magento\Framework\Controller\ResultFactory;
@@ -19,20 +19,21 @@ class Add extends \Magento\Backend\App\Action
     private $coreRegistry;
 
     /**
-     * @var \Altayer\Customcatalog\Model\ProdctFactory
+     * @var \Altayer\Customcatalog\Model\ProductFactory
      */
     private $productFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry,
-     * @param \Altayer\Customcatalog\Model\Product $productFactory
+     * @param \Magento\Framework\Registry $coreRegistry ,
+     * @param \Altayer\Customcatalog\Model\ProductFactory $productFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
-        \Altayer\Customcatalog\Model\ProdctFactory $productFactory
-    ) {
+        \Altayer\Customcatalog\Model\ProductFactory $productFactory
+    )
+    {
         parent::__construct($context);
         $this->coreRegistry = $coreRegistry;
         $this->productFactory = $productFactory;
@@ -44,7 +45,7 @@ class Add extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $rowId = (int) $this->getRequest()->getParam('id');
+        $rowId = (int)$this->getRequest()->getParam('id');
         $rowData = $this->productFactory->create();
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         if ($rowId) {
@@ -59,7 +60,7 @@ class Add extends \Magento\Backend\App\Action
 
         $this->coreRegistry->register('row_data', $rowData);
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $title = $rowId ? __('Edit Product Data ').$rowTitle : __('Add Product');
+        $title = $rowId ? __('Edit Product Data ') . $rowTitle : __('Add Product');
         $resultPage->getConfig()->getTitle()->prepend($title);
         return $resultPage;
     }

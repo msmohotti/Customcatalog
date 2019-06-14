@@ -1,4 +1,11 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
 
 namespace Altayer\Customcatalog\Block\Adminhtml\Product;
 
@@ -13,14 +20,15 @@ class Add extends \Magento\Backend\Block\Widget\Form\Container
 
     /**
      * @param \Magento\Backend\Block\Widget\Context $context
-     * @param \Magento\Framework\Registry           $registry
-     * @param array                                 $data
+     * @param \Magento\Framework\Registry $registry
+     * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Widget\Context $context,
         \Magento\Framework\Registry $registry,
         array $data = []
-    ) {
+    )
+    {
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
     }

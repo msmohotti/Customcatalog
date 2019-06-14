@@ -1,11 +1,20 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
 
 namespace Altayer\Customcatalog\Model;
 
 use Altayer\Customcatalog\Api\ProductRepositoryInterface;
 use Altayer\Customcatalog\Model\Product\Publisher;
 use Altayer\Customcatalog\Model\ResourceModel\Product as ProductResource;
-use Altayer\Customcatalog\Model\Product;
+use Altayer\Customcatalog\Model\ProductFactory;
+use Altayer\Customcatalog\Logger\Logger;
+
 
 /**
  * Class Product
@@ -25,18 +34,28 @@ class ProductRepository implements ProductRepositoryInterface
     private $productFactory;
 
     /**
-     * Product constructor.
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * ProductRepository constructor.
+     * @param ProductResource $resource
      * @param Publisher $publisher
+     * @param Product $productFactory
+     * @param Logger $logger
      */
     public function __construct(
         ProductResource $resource,
         Publisher $publisher,
-        Product $productFactory
+        ProductFactory $productFactory,
+        Logger $logger
     )
     {
         $this->resource = $resource;
         $this->publisher = $publisher;
         $this->productFactory = $productFactory;
+        $this->logger = $logger;
     }
 
     /**
@@ -52,7 +71,7 @@ class ProductRepository implements ProductRepositoryInterface
         $collection = $post->getCollection();
         $collection->addFieldToFilter('vpn', array('eq' => $vpn));
         $results = [];
-        foreach($collection as $item){
+        foreach ($collection as $item) {
             $results[] = $item->getData();
         }
 
@@ -68,14 +87,12 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function save(\Altayer\Customcatalog\Api\Data\ProductInterface $product)
     {
-        try {
-            $this->resource->save($product);
-        } catch (\Exception $exception) {
-            throw new CouldNotSaveException(
-                __('Could not save the page: %1', $exception->getMessage()),
-                $exception
-            );
-        }
+//        $fp = fopen('/tmp/mana.txt', 'w');
+//        fwrite($fp, 'wqwqwqwqwq');
+//        fclose($fp);
+
+        $this->publisher->publish(json_encode($product->getData()));
+
         return $product;
     }
 }

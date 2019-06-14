@@ -1,8 +1,16 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
 
 namespace Altayer\Customcatalog\Controller\Adminhtml\Product;
 
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 
 class MassDelete extends \Magento\Backend\App\Action
@@ -44,10 +52,11 @@ class MassDelete extends \Magento\Backend\App\Action
      */
     public function __construct(
         \Altayer\Customcatalog\Model\ResourceModel\Product $productResource,
-        \Magento\Backend\App\Action\Context $context,
+        Context $context,
         Filter $filter,
         \Altayer\Customcatalog\Model\ResourceModel\Product\CollectionFactory $collectionFactory
-    ) {
+    )
+    {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         $this->productResource = $productResource;
@@ -62,7 +71,8 @@ class MassDelete extends \Magento\Backend\App\Action
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
-        foreach ($collection as $item) {
+        foreach ($collection->getItems() as $item) {
+            exit(get_class($this->productResource));
             $this->productResource->delete($item);
         }
 

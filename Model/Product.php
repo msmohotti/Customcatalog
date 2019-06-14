@@ -1,4 +1,12 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
+
 namespace Altayer\Customcatalog\Model;
 
 use Magento\Framework\Model\AbstractModel;
@@ -34,7 +42,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      * Set EntityId.
      * @return $this
      */
-    public function setEntityId($entityId){
+    public function setEntityId($entityId)
+    {
         return $this->setData(self::ENTITY_ID, $entityId);
     }
 
@@ -42,7 +51,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      * Set ProductId.
      * @return $this
      */
-    public function setProductId($productId){
+    public function setProductId($productId)
+    {
         return $this->setData(self::PRODUCT_ID, $productId);
     }
 
@@ -50,7 +60,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      * Set Copy Write Info.
      * @return $this
      */
-    public function setCopyWriteInfo($copyWriteInfo){
+    public function setCopyWriteInfo($copyWriteInfo)
+    {
         return $this->setData(self::COPY_WRITE_INFO, $copyWriteInfo);
     }
 
@@ -58,7 +69,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      * Set VPN.
      * @return $this
      */
-    public function setVpn($vpn){
+    public function setVpn($vpn)
+    {
         return $this->setData(self::VPN, $vpn);
     }
 
@@ -67,7 +79,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      *
      * @return int
      */
-    public function getEntityId(){
+    public function getEntityId()
+    {
         return $this->getData(self::ENTITY_ID);
     }
 
@@ -76,7 +89,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      *
      * @return string|null
      */
-    public function getProductId(){
+    public function getProductId()
+    {
         return $this->getData(self::PRODUCT_ID);
     }
 
@@ -85,7 +99,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      *
      * @return string|null
      */
-    public function getCopyWriteInfo(){
+    public function getCopyWriteInfo()
+    {
         return $this->getData(self::COPY_WRITE_INFO);
     }
 
@@ -94,7 +109,8 @@ class Product extends AbstractModel implements IdentityInterface, ProductInterfa
      *
      * @return string|null
      */
-    public function getVpn(){
+    public function getVpn()
+    {
         return $this->getData(self::VPN);
     }
 

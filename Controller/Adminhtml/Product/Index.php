@@ -1,12 +1,12 @@
 <?php
 /**
- * Grid Record Index Controller.
- * @category  Webkul
- * @package   Altayer_Product
- * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
- * @license   https://store.webkul.com/license.html
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
  */
+
 namespace Altayer\Customcatalog\Controller\Adminhtml\Product;
 
 class Index extends \Magento\Backend\App\Action
@@ -23,7 +23,8 @@ class Index extends \Magento\Backend\App\Action
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
-    ) {
+    )
+    {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }

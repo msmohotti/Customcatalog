@@ -1,12 +1,12 @@
 <?php
 /**
- * Grid Ui Component Action.
- * @category  Webkul
- * @package   Webkul_Grid
- * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
- * @license   https://store.webkul.com/license.html
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
  */
+
 namespace Altayer\Customcatalog\Ui\Component\Listing\Grid\Column;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -27,12 +27,12 @@ class Action extends Column
     private $_editUrl;
 
     /**
-     * @param ContextInterface   $context
+     * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface       $urlBuilder
-     * @param array              $components
-     * @param array              $data
-     * @param string             $editUrl
+     * @param UrlInterface $urlBuilder
+     * @param array $components
+     * @param array $data
+     * @param string $editUrl
      */
     public function __construct(
         ContextInterface $context,
@@ -41,7 +41,8 @@ class Action extends Column
         array $components = [],
         array $data = [],
         $editUrl = self::ROW_EDIT_URL
-    ) {
+    )
+    {
         $this->_urlBuilder = $urlBuilder;
         $this->_editUrl = $editUrl;
         parent::__construct($context, $uiComponentFactory, $components, $data);

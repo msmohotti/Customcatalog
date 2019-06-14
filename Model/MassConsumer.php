@@ -1,9 +1,15 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
 
 namespace Altayer\Customcatalog\Model;
 
 use Magento\Framework\App\ResourceConnection;
-//use NameSpace\ModuleName\Logger\Logger;
 use Magento\Framework\MessageQueue\MessageLockException;
 use Magento\Framework\MessageQueue\ConnectionLostException;
 use Magento\Framework\Exception\NotFoundException;
@@ -14,7 +20,8 @@ use Magento\Framework\MessageQueue\QueueInterface;
 use Magento\Framework\MessageQueue\LockInterface;
 use Magento\Framework\MessageQueue\MessageController;
 use Magento\Framework\MessageQueue\ConsumerInterface;
-use Psr\Log\LoggerInterface;
+use Altayer\Customcatalog\Logger\Logger;
+use Altayer\Customcatalog\Model\ProcessQueueMsg;
 
 /**
  * Class Consumer used to process OperationInterface messages.
@@ -48,28 +55,29 @@ class MassConsumer implements ConsumerInterface
      */
     private $logger;
 
+    private $processQueueMsg;
+
     /**
      * @var OperationProcessor
      */
     private $operationProcessor;
 
     /**
-     * Initialize dependencies.
-     *
+     * MassConsumer constructor.
      * @param CallbackInvoker $invoker
      * @param ResourceConnection $resource
      * @param MessageController $messageController
      * @param ConsumerConfigurationInterface $configuration
-     * @param OperationProcessorFactory $operationProcessorFactory
-     * @param LoggerInterface $logger
+     * @param Logger $logger
+     * @param ProcessQueueMsg $processQueueMsg
      */
     public function __construct(
         CallbackInvoker $invoker,
         ResourceConnection $resource,
         MessageController $messageController,
         ConsumerConfigurationInterface $configuration,
-        \Altayer\Customcatalog\Model\ProcessQueueMsg $processQueueMsg,
-        \Altayer\Customcatalog\Logger\Logger $logger
+        Logger $logger,
+        ProcessQueueMsg $processQueueMsg
     ) {
         $this->invoker = $invoker;
         $this->resource = $resource;
@@ -84,10 +92,6 @@ class MassConsumer implements ConsumerInterface
      */
     public function process($maxNumberOfMessages = null)
     {
-        $fp = fopen('/tmp/alt.txt', 'w');
-        fwrite($fp, 'qqqqq' . PHP_EOL);
-        fclose($fp);
-
         $queue = $this->configuration->getQueue();
         if (!isset($maxNumberOfMessages)) {
             $queue->subscribe($this->getTransactionCallback($queue));
@@ -111,15 +115,8 @@ class MassConsumer implements ConsumerInterface
                 $lock = $this->messageController->lock($message, $this->configuration->getConsumerName());
                 $message = $message->getBody();
 
-                $this->logger->warning($message);
-                /**
-                 * $this->processQueueMsg->process() use for process message which you publish in queue
-                 */
-//            $data = $this->processQueueMsg->process($message);
-                $data = true;
-                if ($data === false) {
-                    $queue->reject($message); // if get error in message process
-                }
+                $this->processQueueMsg->process($message);
+
             } catch (MessageLockException $exception) {
                 $queue->acknowledge($message);
             } catch (ConnectionLostException $e) {
@@ -132,10 +129,8 @@ class MassConsumer implements ConsumerInterface
                 $queue->acknowledge($message);
                 $this->logger->warning($e->getMessage());
             } catch (\Exception $e) {
-
-
                 echo $e->getMessage();
-//            $queue->reject($message, false, $e->getMessage());
+                $this->logger->warning($e->getMessage());
                 $queue->acknowledge($message);
                 if ($lock) {
                     $this->resource->getConnection()

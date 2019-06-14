@@ -1,4 +1,12 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
+
 namespace Altayer\Customcatalog\Api;
 
 interface ProductRepositoryInterface
@@ -6,9 +14,9 @@ interface ProductRepositoryInterface
     /**
      * Returns product date to user
      *
-     * @api
      * @param string $vpn
      * @return string Greeting message with users name.
+     * @api
      */
     public function getByVpn($vpn);
 

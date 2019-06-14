@@ -1,13 +1,12 @@
 <?php
-
 /**
- * Grid Admin Cagegory Map Record Save Controller.
- * @category  Webkul
- * @package   Webkul_Grid
- * @author    Webkul
- * @copyright Copyright (c) 2010-2016 Webkul Software Private Limited (https://webkul.com)
- * @license   https://store.webkul.com/license.html
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
  */
+
 namespace Altayer\Customcatalog\Controller\Adminhtml\Product;
 
 class Save extends \Magento\Backend\App\Action
@@ -24,7 +23,8 @@ class Save extends \Magento\Backend\App\Action
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Altayer\Customcatalog\Model\ProductFactory $productFactory
-    ) {
+    )
+    {
         parent::__construct($context);
         $this->productFactory = $productFactory;
     }

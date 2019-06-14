@@ -1,9 +1,18 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
+
 namespace Altayer\Customcatalog\Setup;
 
 class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 {
     private $TABLE = 'altayer_customcatalog';
+
     public function install(\Magento\Framework\Setup\SchemaSetupInterface $setup, \Magento\Framework\Setup\ModuleContextInterface $context)
     {
         $installer = $setup;
@@ -19,7 +28,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     [
                         'identity' => true,
                         'nullable' => false,
-                        'primary'  => true,
+                        'primary' => true,
                         'unsigned' => true,
                     ],
                     'Entity Id'

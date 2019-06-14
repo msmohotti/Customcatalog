@@ -1,4 +1,12 @@
 <?php
+/**
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
+ *
+ */
+
 namespace Altayer\Customcatalog\Model\ResourceModel;
 
 
@@ -17,14 +25,15 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * Construct.
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime       $date
-     * @param string|null                                       $resourcePrefix
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
+     * @param string|null $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         \Magento\Framework\Stdlib\DateTime\DateTime $date,
         $resourcePrefix = null
-    ) {
+    )
+    {
         parent::__construct($context, $resourcePrefix);
         $this->_date = $date;
     }
