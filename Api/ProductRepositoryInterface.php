@@ -20,7 +20,4 @@ interface ProductRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function save(\Altayer\Customcatalog\Api\Data\ProductInterface $product);
-
-
-//    public function save($entity_id, $product_id);
 }

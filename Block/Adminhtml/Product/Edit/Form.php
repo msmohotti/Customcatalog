@@ -1,23 +1,19 @@
 <?php
 /**
- * Webkul_Grid Add New Row Form Admin Block.
- * @category    Webkul
- * @package     Webkul_Grid
- * @author      Webkul Software Private Limited
+ * Altayer_Customcatalog Add New Row Form Admin Block.
+ * @category    Altayer
+ * @package     Altayer_Customcatalog
+ * @author      Altayer Group
  *
  */
 namespace Altayer\Customcatalog\Block\Adminhtml\Product\Edit;
 
 /**
- * Adminhtml Add New Row Form.
+ * Class Form
+ * @package Altayer\Customcatalog\Block\Adminhtml\Product\Edit
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
-    /**
-     * @var \Magento\Store\Model\System\Store
-     */
-    protected $_systemStore;
-
     /**
      * @param \Magento\Backend\Block\Template\Context $context,
      * @param \Magento\Framework\Registry $registry,
@@ -39,7 +35,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      */
     protected function _prepareForm()
     {
-        $dateFormat = $this->_localeDate->getDateFormat(\IntlDateFormatter::SHORT);
         $model = $this->_coreRegistry->registry('row_data');
         $form = $this->_formFactory->create(
             ['data' => [

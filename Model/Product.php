@@ -5,7 +5,7 @@ use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\DataObject\IdentityInterface;
 use Altayer\Customcatalog\Api\Data\ProductInterface;
 
-class Customcatalog extends AbstractModel implements IdentityInterface, ProductInterface
+class Product extends AbstractModel implements IdentityInterface, ProductInterface
 {
     const CACHE_TAG = 'altayer_customcatalog';
 
@@ -15,7 +15,7 @@ class Customcatalog extends AbstractModel implements IdentityInterface, ProductI
 
     protected function _construct()
     {
-        $this->_init('Altayer\Customcatalog\Model\ResourceModel\Customcatalog');
+        $this->_init('Altayer\Customcatalog\Model\ResourceModel\Product');
     }
 
     public function getIdentities()

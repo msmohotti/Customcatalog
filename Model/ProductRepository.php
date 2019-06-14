@@ -4,7 +4,8 @@ namespace Altayer\Customcatalog\Model;
 
 use Altayer\Customcatalog\Api\ProductRepositoryInterface;
 use Altayer\Customcatalog\Model\Product\Publisher;
-use Altayer\Customcatalog\Model\ResourceModel\Customcatalog as ResourceCustomcatalog;
+use Altayer\Customcatalog\Model\ResourceModel\Product as ProductResource;
+use Altayer\Customcatalog\Model\Product;
 
 /**
  * Class Product
@@ -21,19 +22,21 @@ class ProductRepository implements ProductRepositoryInterface
      */
     private $publisher;
 
+    private $productFactory;
+
     /**
      * Product constructor.
      * @param Publisher $publisher
      */
     public function __construct(
-        ResourceCustomcatalog $resource,
+        ProductResource $resource,
         Publisher $publisher,
-        \Altayer\Customcatalog\Model\CustomcatalogFactory $postFactory
+        Product $productFactory
     )
     {
         $this->resource = $resource;
         $this->publisher = $publisher;
-        $this->_postFactory = $postFactory;
+        $this->productFactory = $productFactory;
     }
 
     /**
@@ -45,7 +48,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getByVpn($vpn)
     {
-        $post = $this->_postFactory->create();
+        $post = $this->productFactory->create();
         $collection = $post->getCollection();
         $collection->addFieldToFilter('vpn', array('eq' => $vpn));
         $results = [];

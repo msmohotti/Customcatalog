@@ -32,7 +32,7 @@ class MassDelete extends \Magento\Backend\App\Action
     /**
      * @var \Dotdigitalgroup\Email\Model\ResourceModel\Campaign
      */
-    private $campaignResource;
+    private $productResource;
 
     /**
      * MassDelete constructor.
@@ -43,14 +43,14 @@ class MassDelete extends \Magento\Backend\App\Action
      * @param \Dotdigitalgroup\Email\Model\ResourceModel\Campaign\CollectionFactory $collectionFactory
      */
     public function __construct(
-        \Altayer\Customcatalog\Model\ResourceModel\Customcatalog $campaignResource,
+        \Altayer\Customcatalog\Model\ResourceModel\Product $productResource,
         \Magento\Backend\App\Action\Context $context,
         Filter $filter,
-        \Altayer\Customcatalog\Model\ResourceModel\Customcatalog\CollectionFactory $collectionFactory
+        \Altayer\Customcatalog\Model\ResourceModel\Product\CollectionFactory $collectionFactory
     ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
-        $this->campaignResource = $campaignResource;
+        $this->productResource = $productResource;
         parent::__construct($context);
     }
 
@@ -63,7 +63,7 @@ class MassDelete extends \Magento\Backend\App\Action
         $collectionSize = $collection->getSize();
 
         foreach ($collection as $item) {
-            $this->campaignResource->delete($item);
+            $this->productResource->delete($item);
         }
 
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));

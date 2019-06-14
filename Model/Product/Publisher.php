@@ -6,7 +6,6 @@ use Magento\Framework\MessageQueue\PublisherInterface;
 
 class Publisher
 {
-//    const TOPIC_NAME = "altayer.customcatalog.topic";
     const TOPIC_NAME = "altayer.customcatalog.topic";
 
     /**

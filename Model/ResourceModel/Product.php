@@ -2,7 +2,7 @@
 namespace Altayer\Customcatalog\Model\ResourceModel;
 
 
-class Customcatalog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
      * @var string

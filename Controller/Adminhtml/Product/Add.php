@@ -19,23 +19,23 @@ class Add extends \Magento\Backend\App\Action
     private $coreRegistry;
 
     /**
-     * @var \Altayer\Customcatalog\Model\CustomcatalogFactory
+     * @var \Altayer\Customcatalog\Model\ProdctFactory
      */
-    private $customcatalogFactory;
+    private $productFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry,
-     * @param \Altayer\Customcatalog\Model\CustomcatalogFactory $customcatalogFactory
+     * @param \Altayer\Customcatalog\Model\Product $productFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
-        \Altayer\Customcatalog\Model\CustomcatalogFactory $customcatalogFactory
+        \Altayer\Customcatalog\Model\ProdctFactory $productFactory
     ) {
         parent::__construct($context);
         $this->coreRegistry = $coreRegistry;
-        $this->customcatalogFactory = $customcatalogFactory;
+        $this->productFactory = $productFactory;
     }
 
     /**
@@ -45,7 +45,7 @@ class Add extends \Magento\Backend\App\Action
     public function execute()
     {
         $rowId = (int) $this->getRequest()->getParam('id');
-        $rowData = $this->customcatalogFactory->create();
+        $rowData = $this->productFactory->create();
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         if ($rowId) {
             $rowData = $rowData->load($rowId);

@@ -1,11 +1,5 @@
 <?php
-    /**
-     * Webkul_Grid Add Row Form Block.
-     *
-     * @category    Webkul
-     *
-     * @author      Webkul Software Private Limited
-     */
+
 namespace Altayer\Customcatalog\Block\Adminhtml\Product;
 
 class Add extends \Magento\Backend\Block\Widget\Form\Container

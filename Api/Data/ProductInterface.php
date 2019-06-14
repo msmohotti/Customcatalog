@@ -1,20 +1,13 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace Altayer\Customcatalog\Api\Data;
 
 /**
- * CMS page interface.
- * @api
- * @since 100.0.2
+ * Interface ProductInterface
+ * @package Altayer\Customcatalog\Api\Data
  */
 interface ProductInterface
 {
-    /**
-     * Constants for keys of data array. Identical to the name of the getter in snake case.
-     */
     const ENTITY_ID = 'entity_id';
     const PRODUCT_ID = 'product_id';
     const COPY_WRITE_INFO = 'copy_write_info';
@@ -70,6 +63,4 @@ interface ProductInterface
      * @return $this
      */
     public function setVpn($vpn);
-
-
 }

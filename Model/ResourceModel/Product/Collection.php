@@ -1,6 +1,6 @@
 <?php
 
-namespace Altayer\Customcatalog\Model\ResourceModel\Customcatalog;
+namespace Altayer\Customcatalog\Model\ResourceModel\Product;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
@@ -15,8 +15,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('Altayer\Customcatalog\Model\Customcatalog',
-            'Altayer\Customcatalog\Model\ResourceModel\Customcatalog');
+        $this->_init('Altayer\Customcatalog\Model\Product',
+            'Altayer\Customcatalog\Model\ResourceModel\Product');
     }
 
 }
