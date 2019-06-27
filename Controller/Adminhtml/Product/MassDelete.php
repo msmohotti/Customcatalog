@@ -12,6 +12,9 @@ namespace Altayer\Customcatalog\Controller\Adminhtml\Product;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
+use Altayer\Customcatalog\Model\ResourceModel\Product;
+use Altayer\Customcatalog\Model\ResourceModel\Product\CollectionFactory;
+use Altayer\Customcatalog\Model\ProductFactory;
 
 class MassDelete extends \Magento\Backend\App\Action
 {
@@ -38,42 +41,43 @@ class MassDelete extends \Magento\Backend\App\Action
     private $filter;
 
     /**
-     * @var \Dotdigitalgroup\Email\Model\ResourceModel\Campaign
+     * @var \Altayer\Customcatalog\Model\ProductFactory
      */
-    private $productResource;
+    private $productFactory;
 
     /**
      * MassDelete constructor.
-     *
-     * @param \Dotdigitalgroup\Email\Model\ResourceModel\Campaign $campaignResource
-     * @param \Magento\Backend\App\Action\Context $context
+     * @param Context $context
      * @param Filter $filter
-     * @param \Dotdigitalgroup\Email\Model\ResourceModel\Campaign\CollectionFactory $collectionFactory
+     * @param CollectionFactory $collectionFactory
+     * @param ProductFactory $productFactory
      */
     public function __construct(
-        \Altayer\Customcatalog\Model\ResourceModel\Product $productResource,
         Context $context,
         Filter $filter,
-        \Altayer\Customcatalog\Model\ResourceModel\Product\CollectionFactory $collectionFactory
+        CollectionFactory $collectionFactory,
+        ProductFactory $productFactory
     )
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
-        $this->productResource = $productResource;
+        $this->productFactory = $productFactory;
         parent::__construct($context);
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute()
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
-        foreach ($collection->getItems() as $item) {
-            exit(get_class($this->productResource));
-            $this->productResource->delete($item);
+        $prod = $this->productFactory->create();
+
+        foreach ($collection as $item) {
+            $prod->load($item->getId())->delete();
         }
 
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));

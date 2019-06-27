@@ -12,6 +12,7 @@ namespace Altayer\Customcatalog\Model;
 use Altayer\Customcatalog\Model\Product\Publisher;
 use Altayer\Customcatalog\Model\ResourceModel\Product as ProductResource;
 use Altayer\Customcatalog\Logger\Logger;
+use Altayer\Customcatalog\Model\ProductFactory;
 
 class ProcessQueueMsg
 {
@@ -28,13 +29,13 @@ class ProcessQueueMsg
      * @param ProductResource $resource
      * @param Publisher $publisher
      * @param Logger $logger
-     * @param Product $productFactory
+     * @param ProductFactory $productFactory
      */
     public function __construct(
         ProductResource $resource,
         Publisher $publisher,
         Logger $logger,
-        Product $productFactory
+        ProductFactory $productFactory
     )
     {
         $this->resource = $resource;
@@ -45,15 +46,29 @@ class ProcessQueueMsg
 
     public function process($message)
     {
-        $product = json_decode($message);
+        $cleanMessage = stripcslashes(str_replace('""', '', stripcslashes($message)));
+
+        $array  = json_decode($cleanMessage, true);
+
+        $rowData = $this->productFactory->create();
 
         try {
-            $this->resource->save($product);
+            if($array['entity_id'] != null){
+                $rowData->load($array['entity_id']);
+//                $rowData->setEntityId($array['entity_id']);
+            }
+            if(isset($array['product_id'])){
+                $rowData->setProductId($array['product_id']);
+            }
+            if(isset($array['copy_write_info'])){
+                $rowData->setCopyWriteInfo($array['copy_write_info']);
+            }
+            if(isset($array['vpn'])){
+                $rowData->setVpn($array['vpn']);
+            }
+            $rowData->save();
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(
-                __('Could not save the product: %1', $exception->getMessage()),
-                $exception
-            );
+            $this->logger->addError('Could not save the product' . $exception->getMessage() , $array);
         }
     }
 }

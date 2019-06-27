@@ -67,8 +67,8 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getByVpn($vpn)
     {
-        $post = $this->productFactory->create();
-        $collection = $post->getCollection();
+        $product = $this->productFactory->create();
+        $collection = $product->getCollection();
         $collection->addFieldToFilter('vpn', array('eq' => $vpn));
         $results = [];
         foreach ($collection as $item) {
@@ -87,12 +87,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function save(\Altayer\Customcatalog\Api\Data\ProductInterface $product)
     {
-//        $fp = fopen('/tmp/mana.txt', 'w');
-//        fwrite($fp, 'wqwqwqwqwq');
-//        fclose($fp);
-
-        $this->publisher->publish(json_encode($product->getData()));
-
+        $this->publisher->publish(json_encode($product->getData(), JSON_UNESCAPED_SLASHES));
         return $product;
     }
 }
